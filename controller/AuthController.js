@@ -37,11 +37,12 @@ class AuthController {
 
 
     async login(req, res, next) {
-        const data = req.data
+        const data = req.body
         try {
-            const user = await db.collection('users').get();
-        }catch(e){
-
+            const user = await db.collection('users').where('email', '==', data.email).limit(1).get();
+            console.log(user)
+        } catch (e) {
+            console.log(e)
         }
     }
 }
